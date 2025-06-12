@@ -1,5 +1,8 @@
 #include "recipe_generator.h"
 
+#include <stddef.h>
+#include <stdlib.h>
+
 /*
  * You are building an interactive recipe generator that creates recipes based on the user’s
  * current ingredients and taste profile, repeating the generation process until the user approves

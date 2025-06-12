@@ -1,5 +1,8 @@
 #include "workout_scheduler.h"
 
+#include <stddef.h>
+#include <stdlib.h>
+
 /*
  * You’re building a workout scheduler for a fitness tracking app. The system fetches a
  * user’s data, builds a preliminary workout plan, refines it with the user’s preferences, and
@@ -9,7 +12,7 @@
 
 struct WorkoutPlan *create_workout_schedule(char *username) {
     struct UserData *data = get_user_data(username);
-    struct WorkoutPLan *plan = NULL;
+    struct WorkoutPlan *plan = NULL;
 
     if (data) {
         plan = build_base_plan(data);

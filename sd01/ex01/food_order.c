@@ -1,5 +1,8 @@
 #include "food_order.h"
 
+#include <stddef.h>
+#include <stdlib.h>
+
 /*
  * You’re building the backend for a food delivery app. A critical task is to process an incoming
  * order. The logic changes depending on whether the restaurant is currently open
@@ -8,7 +11,6 @@
  * Your goal is to implement the control logic that, given an order request, checks the restaurant’s
  * status, prepares the appropriate confirmation, and sends a notification.
 */
-
 
 int process_food_order(struct OrderRequest *request) {
     struct OderConfirmation * confirmation = NULL;

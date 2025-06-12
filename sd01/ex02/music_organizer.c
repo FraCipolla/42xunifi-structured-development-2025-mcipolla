@@ -1,5 +1,8 @@
 #include "music_organizer.h"
 
+#include <stddef.h>
+#include <stdlib.h>
+
 /*
  * You’re a music enthusiast and want to organize your vast digital music library. Your goal
  * is to automate the process of scanning music files, categorizing them, and updating a

@@ -1,5 +1,8 @@
 #include "movie_planner.h"
 
+#include <stddef.h>
+#include <stdlib.h>
+
 /*
  * You’re planning a chill movie night with your friends. The goal is to orchestrate the process
  * of collecting your friends’ preferences, searching for matching movies, and building

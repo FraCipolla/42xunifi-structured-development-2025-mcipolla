@@ -1,5 +1,8 @@
 #include "playlist_creator.h"
 
+#include <stddef.h>
+#include <stdlib.h>
+
 /*
  * You are building a personalized playlist generator for a music app. The program should:
  * 1. Analyze the user’s mood.
@@ -13,7 +16,7 @@
 struct Playlist *create_playlist(void) {
     struct MoodSettings *mood = analyze_user_mood();
     struct FilterSettings *filter = default_filters();
-    struct PlayList *play_list = NULL;
+    struct Playlist *play_list = NULL;
 
     if (mood && filter) {
         int variations = get_mood_variations(mood);
@@ -24,8 +27,8 @@ struct Playlist *create_playlist(void) {
                 refined = NULL;
             }
             if (!refined) break;
-            free_filter_settings(mood);
-            mood = refined;
+            free_filter_settings(filter);
+            filter = refined;
             variations--;
         }
         
