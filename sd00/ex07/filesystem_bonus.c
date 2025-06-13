@@ -42,14 +42,13 @@ void free_filesystem(FSNode *node) {
 
     FSNode *child = node->children;
     while(child) {
-        if (child->size == 0) { // case folder
-            free_filesystem(child);
-            child = child->next;
+        FSNode *tmp = child;
+        child = child->next;
+        if (tmp->size == 0) { // case folder
+            free_filesystem(tmp);
         } else {
-            FSNode *to_free = child;
-            child = child->next;
-            free(to_free->name);
-            free(to_free);
+            free(tmp->name);
+            free(tmp);
         }
     }
     free(node->name);

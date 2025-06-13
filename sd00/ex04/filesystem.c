@@ -26,16 +26,15 @@ FSNode *create_folder(const char *name) {
 void add_child(FSNode *parent, FSNode *child) {
     if (!parent || !child) return;
     
+    child->parent = parent;
     if (!parent->children) {
-        child->parent = parent;
         parent->children = child;
         return ;
     }
     FSNode *tmp = parent->children;
-    while (tmp && tmp->next != parent->next) {
+    while (tmp && tmp->next) {
         tmp = tmp->next;
     }
-    child->parent = parent;
     tmp->next = child;
 }
 

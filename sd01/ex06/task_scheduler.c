@@ -12,27 +12,29 @@
 */
 
 struct ScheduleResult *schedule_tasks(struct TaskList *tasks) {
-    struct TaskProfile *profile = profile_tasks(tasks);
-    struct ScheduleResult *result = NULL;
-    static int last_core;
-    
-    if (profile) {
-        struct PriorityMap *priorities = compute_priorities_mock(profile);
-        int core_count = get_available_core_count();
-        if (priorities) {
-            int task_id = select_best_task_for_current_priorities(profile, priorities);
-            result = create_schedule_result(core_count);
-            if (result) {
-                update_schedule_entry(result, last_core, task_id);
-                if (last_core == core_count - 1) {
-                    last_core = 0;
-                } else {
-                    last_core++;
+    int core_count = get_available_core_count();
+    struct ScheduleResult *result = create_schedule_result(core_count);
+    if (result) {
+        int current_core = 0;
+        while (tasks) {
+            struct TaskProfile *profile = profile_tasks(tasks);
+            if (profile) {
+                struct PriorityMap *priorities = compute_priorities_mock(profile);
+                if (priorities) {
+                    int task_id = select_best_task_for_current_priorities(profile, priorities);
+                    update_schedule_entry(result, current_core, task_id);
+                    if (current_core == core_count - 1) {
+                        current_core = 0;
+                    } else {
+                        current_core++;
+                    }
+                    free_priority_map(priorities);
                 }
+                free_task_profile(profile);
             }
-            free_priority_map(priorities);
+            // assuming tasks is a list
+            tasks = tasks->next;
         }
-        free_task_profile(profile);
     }
     return result;
 }
